@@ -1,4 +1,6 @@
 const taskcontainer = document.querySelector(".task__container");
+
+const storage=[];
 const newcard = ({id, imageurl, tasktitle, taskdescription, tasktype}) => `<div class="col-md-6 col-lg-4" id=${id}>
 <div class="card px-3" >
     <div class="card-header d-flex justify-content-end column-gap-2">
@@ -21,6 +23,17 @@ const newcard = ({id, imageurl, tasktitle, taskdescription, tasktype}) => `<div 
   </div>
 </div>`
 
+const loadData = () => {
+    const initialData=localStorage.getItem("tasky");
+    if (!initialData) return;
+    const {cards} = JSON.parse(initialData);
+    cards.map((card) => {
+        const createNewCard = newcard(card);
+        taskcontainer.insertAdjacentHTML("beforeend", createNewCard);
+        storage.push(card);
+    });
+};
+
 const saveChanges = () => {
     const taskData = {
         id: `${new Date().getTime()}`,
@@ -31,4 +44,6 @@ const saveChanges = () => {
     };
     const createnewcard = newcard(taskData);
     taskcontainer.insertAdjacentHTML("beforeend", createnewcard);
+    storage.push(taskData);
+    localStorage.setItem("tasky", JSON.stringify({cards: storage}));
 };
