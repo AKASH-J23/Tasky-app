@@ -72,13 +72,19 @@ const deleteCard = (event) => {
 const editCard = (event) => {
     event = window.event;
     const targetID = event.target.id;
-    const targetName =event.target.targetName;
+    const tagname =event.target.tagName;
     let parentElement;
-    if (tagName === "BUTTON"){
+    if (tagname === "BUTTON"){
         parentElement = event.target.parentNode.parentNode;
     }else{
         parentElement = event.target.parentNode.parentNode.parentNode;
     }
-    let taskTitle = parentElement.childNodes
-    console.log(taskTitle);
+    let taskTitle = parentElement.childNodes[5].childNodes[1];
+    let taskDescription = parentElement.childNodes[5].childNodes[3];
+    let taskType = parentElement.childNodes[5].childNodes[5];
+    let submitButton = parentElement.childNodes[7].childNodes[1];
+    taskTitle.setAttribute("contenteditable", "true");
+    taskDescription.setAttribute("contenteditable", "true");
+    taskType.setAttribute("contenteditable", "true");
+    submitButton.innerHTML="Save Changes";
 };
