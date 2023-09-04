@@ -4,8 +4,8 @@ let storage=[];
 const newcard = ({id, imageurl, tasktitle, taskdescription, tasktype}) => `<div class="col-md-6 col-lg-4" id=${id}>
 <div class="card px-3" >
     <div class="card-header d-flex justify-content-end column-gap-2">
-        <button type="button" class="btn btn-outline-success">
-            <i class="fa-solid fa-pen"></i>
+        <button type="button" class="btn btn-outline-success" id=${id} onclick="editCard.apply(this,arguments)">
+            <i class="fa-solid fa-pen" id=${id} onclick="editCard.apply(this,arguments)"></i>
         </button>
         <button type="button" class="btn btn-outline-danger" id=${id} onclick="deleteCard.apply(this,arguments)">
             <i class="fa-solid fa-trash" onclick="deleteCard.apply(this,arguments)" id=${id}></i>
@@ -64,6 +64,20 @@ const deleteCard = (event) => {
         );
     };
     return taskcontainer.removeChild(
-        event.target.parentNode.parentNode.parentNode.parentNode
+        event.target.parentNode.parentNode.parentNode.parentNode.parentNode
     );
+};
+
+const editCard = (event) => {
+    event = window.event;
+    const targetID = event.target.id;
+    const targetName =event.target.targetName;
+    let parentElement;
+    if (tagName === "BUTTON"){
+        parentElement = event.target.parentNode.parentNode;
+    }else{
+        parentElement = event.target.parentNode.parentNode.parentNode;
+    }
+    let taskTitle = parentElement.childNodes
+    console.log(raskTitl);
 };
