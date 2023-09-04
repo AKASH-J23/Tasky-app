@@ -55,16 +55,17 @@ const saveChanges = () => {
 const deleteCard = (event) => {
     event = window.event;
     const targetID = event.target.id;
-    const targetName =event.target.targetName;
-    storage = storage.filter((card) => card.id !== targetID);
+    const tagname =event.target.tagName;
+    const newUpdatedArray = storage.filter((card) => card.id !== targetID);
+    storage = newUpdatedArray;
     updateLocalStorage();
-    if (targetName === "BUTTON"){
-        return taskcontainer.removeChild(
+    if (tagname === "BUTTON"){
+        return event.target.parentNode.parentNode.parentNode.parentNode.removeChild(
             event.target.parentNode.parentNode.parentNode
         );
     };
-    return taskcontainer.removeChild(
-        event.target.parentNode.parentNode.parentNode.parentNode.parentNode
+    return event.target.parentNode.parentNode.parentNode.parentNode.parentNode.removeChild(
+        event.target.parentNode.parentNode.parentNode.parentNode
     );
 };
 
@@ -79,5 +80,5 @@ const editCard = (event) => {
         parentElement = event.target.parentNode.parentNode.parentNode;
     }
     let taskTitle = parentElement.childNodes
-    console.log(raskTitl);
+    console.log(taskTitle);
 };
